@@ -1,0 +1,9 @@
+{
+  "name": "doc-maker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "資料メーカー 〜企画書・チラシ・説明資料・一覧表を PDF まで〜 — 内容メモを渡すだけで、企画書（HTML/CSS/Markdown）・チラシ（画像）・説明資料（スライド）・一覧表（Excel/CSV）を codex CLI（サブスク）で生成し、手元の Chrome で PDF 化。依存パッケージ不要、データはすべてローカル保存。",
+  "bin": { "doc-maker": "bin/cli.js" },
+  "scripts": { "start": "node bin/cli.js", "dev": "node bin/cli.js", "make": "node bin/cli.js make" },
+  "license": "UNLICENSED"
+}

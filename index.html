@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資料メーカー 〜企画書・チラシ・説明資料・一覧表を PDF まで〜</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+  <symbol id="i-flyer" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></symbol>
+  <symbol id="i-slides" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h1.5a1.5 1.5 0 0 1 0 3H9zM13 13h1.2a1.8 1.8 0 0 1 0 3.6H13z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0 0 20.5 15"/></symbol>
+</svg>
+
+<header class="site-header">
+  <h1>資料メーカー</h1>
+  <p class="subtitle">企画書・チラシ・説明資料・一覧表を、メモを渡すだけで作成し、そのまま PDF まで</p>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-view="make"><svg class="ic"><use href="#i-pen"/></svg>作る</button>
+  <button class="tab" data-view="list"><svg class="ic"><use href="#i-list"/></svg>作った資料</button>
+  <button class="tab" data-view="settings"><svg class="ic"><use href="#i-gear"/></svg>設定</button>
+</nav>
+
+<main>
+  <div id="license-banner" class="license-banner hidden"></div>
+  <div id="activate-panel" class="activate-panel hidden">
+    <p class="activate-lead">アシュラ会員の方はメールアドレスで認証できます。認証するとチラシ・説明資料（スライド）の画像生成が使えます。</p>
+    <div class="activate-row">
+      <input type="email" id="activate-email" placeholder="会員登録のメールアドレス" autocomplete="email">
+      <button type="button" id="activate-btn">認証</button>
+    </div>
+    <p id="activate-msg" class="activate-msg hidden"></p>
+  </div>
+  <div id="env-warning" class="warning-box hidden"></div>
+
+  <!-- ===== 作る ===== -->
+  <section class="view" id="view-make">
+    <section class="card">
+      <h2>1. 何を作りますか</h2>
+      <div class="kind-grid" id="kind-grid">
+        <button type="button" class="kind active" data-kind="proposal"><svg class="ic big"><use href="#i-doc"/></svg><span class="kn">企画書・提案書</span><span class="kd">A4 縦の文書。HTML / CSS / Markdown / PDF</span></button>
+        <button type="button" class="kind" data-kind="flyer"><svg class="ic big"><use href="#i-flyer"/></svg><span class="kn">チラシ<span class="member-tag">会員</span></span><span class="kd">A4 1 枚のビジュアル。PNG / PDF</span></button>
+        <button type="button" class="kind" data-kind="slides"><svg class="ic big"><use href="#i-slides"/></svg><span class="kn">説明資料<span class="member-tag">会員</span></span><span class="kd">16:9 スライド。PNG / PDF / スピーカーノート</span></button>
+        <button type="button" class="kind" data-kind="sheet"><svg class="ic big"><use href="#i-sheet"/></svg><span class="kn">一覧表・シート</span><span class="kd">Excel / CSV / A4 横 PDF</span></button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. 内容を伝える</h2>
+      <div class="form-grid">
+        <div class="field wide">
+          <label for="f-memo">内容メモ <span class="req">必須</span> — 箇条書き・メール文・打合せメモなど、素材をそのまま貼ってください</label>
+          <textarea id="f-memo" rows="10" placeholder="例）北都銀行さんから小学5・6年生向けの勉強会の依頼。参加10名程度。ゲームの世界を自分で作る体験を軸に……"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-title">タイトル（仮でOK・空なら自動）</label>
+          <input type="text" id="f-title" placeholder="例）子ども向け テクノロジー体験教室 企画書">
+        </div>
+        <div class="field">
+          <label for="f-to">宛先・提出先</label>
+          <input type="text" id="f-to" placeholder="例）株式会社〇〇 地方創生部 御中">
+        </div>
+        <div class="field">
+          <label for="f-from">差出人（自分・自社）</label>
+          <input type="text" id="f-from" placeholder="例）if(塾) 高崎翔太">
+        </div>
+        <div class="field">
+          <label for="f-audience">対象読者・ターゲット</label>
+          <input type="text" id="f-audience" placeholder="例）銀行の担当者 / 小学生の保護者">
+        </div>
+        <div class="field wide">
+          <label for="f-purpose">目的・ゴール（この資料で相手にどうしてほしいか）</label>
+          <input type="text" id="f-purpose" placeholder="例）企画の承認をもらい、日程調整に進みたい">
+        </div>
+        <div class="field wide">
+          <label for="f-avoid">避けたい・ぼかしたい表現（あれば）</label>
+          <input type="text" id="f-avoid" placeholder="例）「AIを子どもに使わせる」という直接的な表現は避け、「最新テクノロジー体験」と言い換える">
+        </div>
+        <div class="field">
+          <label for="f-tone">トーン・雰囲気</label>
+          <input type="text" id="f-tone" placeholder="例）誠実で堅め / 明るく親しみやすい">
+        </div>
+        <div class="field">
+          <label for="f-must">必ず入れたいこと</label>
+          <input type="text" id="f-must" placeholder="例）安全面への配慮、当日の流れ">
+        </div>
+
+        <!-- 企画書 -->
+        <div class="field" data-for="proposal">
+          <label for="f-doctype">文書の種類</label>
+          <select id="f-doctype">
+            <option value="企画書">企画書</option>
+            <option value="提案書">提案書</option>
+            <option value="ご案内">ご案内（案内文）</option>
+            <option value="報告書">報告書</option>
+            <option value="説明書">説明書・手順書</option>
+            <option value="お礼状">お礼状・依頼文</option>
+          </select>
+        </div>
+        <div class="field" data-for="proposal">
+          <label for="f-length">分量</label>
+          <select id="f-length">
+            <option value="short">短め（1〜2 ページ）</option>
+            <option value="standard" selected>標準（3〜4 ページ）</option>
+            <option value="long">詳しく（5〜8 ページ）</option>
+          </select>
+        </div>
+        <div class="field" data-for="proposal sheet">
+          <label for="f-theme">デザインテーマ</label>
+          <select id="f-theme"></select>
+        </div>
+
+        <!-- チラシ -->
+        <div class="field" data-for="flyer">
+          <label for="f-size">サイズ</label>
+          <select id="f-size"></select>
+        </div>
+        <div class="field" data-for="flyer slides">
+          <label for="f-style">画風・デザインの雰囲気</label>
+          <input type="text" id="f-style" placeholder="例）明るいフラットイラスト / 写真風 / 和風">
+        </div>
+        <div class="field" data-for="flyer slides">
+          <label for="f-colors">配色（主色・アクセント）</label>
+          <input type="text" id="f-colors" placeholder="例）青と黄色 / #1e2b4d と #b8963e">
+        </div>
+        <div class="field wide" data-for="flyer slides">
+          <label for="f-refs">参考画像（ロゴ・キャラなど。1 行 1 パス。任意）</label>
+          <textarea id="f-refs" rows="2" placeholder="/Users/xxx/Desktop/character.png"></textarea>
+        </div>
+        <fieldset class="field wide event" data-for="flyer">
+          <legend>開催情報（チラシに載せる。分かるものだけ）</legend>
+          <div class="form-grid">
+            <div class="field"><label for="f-edate">日時</label><input type="text" id="f-edate" placeholder="例）2026年11月15日（土）10:00〜12:00"></div>
+            <div class="field"><label for="f-eplace">場所</label><input type="text" id="f-eplace" placeholder="例）〇〇銀行 本店 3階 会議室"></div>
+            <div class="field"><label for="f-etarget">対象</label><input type="text" id="f-etarget" placeholder="例）小学5・6年生"></div>
+            <div class="field"><label for="f-ecap">定員</label><input type="text" id="f-ecap" placeholder="例）10名（先着順）"></div>
+            <div class="field"><label for="f-efee">参加費</label><input type="text" id="f-efee" placeholder="例）無料"></div>
+            <div class="field"><label for="f-eapply">申込方法</label><input type="text" id="f-eapply" placeholder="例）QR コードから / お電話で"></div>
+            <div class="field"><label for="f-ehost">主催・共催</label><input type="text" id="f-ehost" placeholder="例）主催: 〇〇銀行 / 運営: if(塾)"></div>
+            <div class="field"><label for="f-enote">持ち物・その他</label><input type="text" id="f-enote" placeholder="例）筆記用具。ノートPCは貸し出します"></div>
+          </div>
+        </fieldset>
+
+        <!-- 説明資料 -->
+        <div class="field" data-for="slides">
+          <label for="f-count">枚数</label>
+          <input type="number" id="f-count" min="3" max="30" value="8">
+        </div>
+        <div class="field" data-for="slides">
+          <label for="f-duration">想定説明時間（分）</label>
+          <input type="number" id="f-duration" min="1" max="180" value="10">
+        </div>
+
+        <div class="field wide">
+          <label for="f-extra">その他の指示（任意）</label>
+          <input type="text" id="f-extra" placeholder="例）費用は金額を書かず「別途お見積り」に">
+        </div>
+      </div>
+      <button id="btn-submit" class="primary">作成する</button>
+      <p class="note" id="submit-note">生成はこのパソコンの codex（ChatGPT サブスク）で行います。企画書・一覧表は 1〜3 分、チラシは 3〜5 分、スライドは 1 枚あたり 1〜2 分かかります。画面を閉じても処理は続きます。</p>
+    </section>
+
+    <section class="card" id="jobs-card">
+      <h2>処理状況</h2>
+      <div id="jobs"><p class="note">まだ処理はありません。</p></div>
+    </section>
+  </section>
+
+  <!-- ===== 一覧 ===== -->
+  <section class="view hidden" id="view-list">
+    <section class="card">
+      <h2>作った資料</h2>
+      <div class="toolbar">
+        <input type="search" id="list-search" placeholder="タイトル・宛先で絞り込み">
+        <select id="list-kind"><option value="">すべての種類</option><option value="proposal">企画書・提案書</option><option value="flyer">チラシ</option><option value="slides">説明資料</option><option value="sheet">一覧表</option></select>
+        <button type="button" class="secondary" id="btn-open-data"><svg class="ic"><use href="#i-folder"/></svg>保存フォルダを開く</button>
+      </div>
+      <div id="project-list" class="project-list"></div>
+    </section>
+  </section>
+
+  <!-- ===== 詳細 ===== -->
+  <section class="view hidden" id="view-detail">
+    <button type="button" class="secondary" id="btn-back"><svg class="ic"><use href="#i-back"/></svg>一覧へ戻る</button>
+    <div id="detail"></div>
+  </section>
+
+  <!-- ===== 設定 ===== -->
+  <section class="view hidden" id="view-settings">
+    <section class="card">
+      <h2>環境チェック</h2>
+      <div id="env-check"></div>
+    </section>
+    <section class="card">
+      <h2>設定</h2>
+      <div class="form-grid">
+        <div class="field wide">
+          <label for="s-datadir">保存フォルダ</label>
+          <input type="text" id="s-datadir">
+        </div>
+        <div class="field wide">
+          <label for="s-chrome">PDF 化に使うブラウザ（空なら自動検出。Chrome / Edge / Chromium の実行ファイル）</label>
+          <input type="text" id="s-chrome" placeholder="例）/Applications/Google Chrome.app/Contents/MacOS/Google Chrome">
+        </div>
+        <div class="field">
+          <label for="s-org">差出人の既定値</label>
+          <input type="text" id="s-org" placeholder="例）if(塾) 高崎翔太">
+        </div>
+        <div class="field">
+          <label for="s-contact">連絡先の既定値</label>
+          <input type="text" id="s-contact" placeholder="例）info@example.com / 000-0000-0000">
+        </div>
+        <div class="field">
+          <label for="s-theme">既定のデザインテーマ</label>
+          <select id="s-theme"></select>
+        </div>
+        <div class="field">
+          <label for="s-model">codex のモデル（空なら既定）</label>
+          <input type="text" id="s-model" placeholder="空欄推奨">
+        </div>
+      </div>
+      <button type="button" class="primary" id="btn-save-settings">設定を保存</button>
+      <p class="note" id="settings-msg"></p>
+      <p class="note">設定ファイル: <code id="config-path"></code></p>
+    </section>
+    <section class="card">
+      <h2>使い方のヒント</h2>
+      <ul>
+        <li>内容メモには、相手からのメール・打合せメモ・自分の考えをそのまま貼るのがいちばん早いです。整理は資料メーカーがやります。</li>
+        <li>できた資料は「作った資料」から開き、「修正指示」に一言書くと作り直せます（例: 費用の表を削って / もっと柔らかい言い方に）。</li>
+        <li>企画書・一覧表は HTML と CSS も保存されるので、手で直してから「HTML から PDF を作り直す」もできます。</li>
+        <li>説明資料の 1 枚だけ気に入らないときは、その枚の「作り直す」で個別に再生成できます。</li>
+      </ul>
+    </section>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p id="free-credit" class="free-credit hidden"></p>
+  <p>資料メーカー — 生成は codex CLI（ChatGPT サブスク）、PDF 化は手元のブラウザ。データはこのパソコンの中だけに保存されます。</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
