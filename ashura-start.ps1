@@ -139,10 +139,10 @@ $url = $knownUrl
 for ($i = 0; $i -lt 120; $i++) {
   if (-not $url) { $m = Select-String -Path $Log -Pattern 'https?://(localhost|127\.0\.0\.1):[0-9]+' -ErrorAction SilentlyContinue | Select-Object -First 1; if ($m) { $url = $m.Matches[0].Value } }
   if ($url -and (Responds $url)) { break }
-  if (-not (Alive)) { Fail "サーバーが途中で終了しました。ログ（$Log）の末尾:"; Get-Content $Log -Tail 30; Fail "上の赤い文字をそのまま Codex に貼って「直して」と頼んでください。"; exit 1 }
+  if (-not (Alive)) { Fail "サーバーが途中で終了しました。ログ（${Log}）の末尾:"; Get-Content $Log -Tail 30; Fail "上の赤い文字をそのまま Codex に貼って「直して」と頼んでください。"; exit 1 }
   Start-Sleep -Seconds 1
 }
-if (-not $url -or -not (Responds $url)) { Fail "起動を確認できませんでした。ログ（$Log）の末尾:"; Get-Content $Log -Tail 30; exit 1 }
+if (-not $url -or -not (Responds $url)) { Fail "起動を確認できませんでした。ログ（${Log}）の末尾:"; Get-Content $Log -Tail 30; exit 1 }
 $url = $url.Replace("127.0.0.1", "localhost")
 Set-Content -Path $UrlF -Value $url
 

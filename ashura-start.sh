@@ -157,7 +157,7 @@ if [ "$KIND" = "next-cli" ] || [ "$KIND" = "next-start" ]; then
   [ "$KIND" = "next-cli" ] && [ ! -f .next/standalone/server.js ] && NEED=1
   if [ "$NEED" = 0 ]; then
     CHANGED="$(find app lib components src pages -type f -newer .next/BUILD_ID 2>/dev/null | head -1)"
-    [ -n "$CHANGED" ] && NEED=1 && say "ソースの変更を検知しました（$CHANGED）。作り直します"
+    [ -n "$CHANGED" ] && NEED=1 && say "ソースの変更を検知しました（${CHANGED}）。作り直します"
   fi
   if [ "$NEED" = 1 ]; then
     say "画面を組み立てています（初回と改造後のみ。数分かかります）…"
@@ -186,14 +186,14 @@ for _ in $(seq 1 120); do
   [ -z "$URL" ] && URL="$(grep -oE 'https?://(localhost|127\.0\.0\.1):[0-9]+' "$LOG" 2>/dev/null | head -1 || true)"
   if [ -n "$URL" ] && responds "$URL"; then break; fi
   if ! alive; then
-    fail "サーバーが途中で終了しました。ログ（$LOG）の末尾:"; tail -n 30 "$LOG"
+    fail "サーバーが途中で終了しました。ログ（${LOG}）の末尾:"; tail -n 30 "$LOG"
     echo ""; fail "上の赤い文字をそのまま Codex に貼って「直して」と頼んでください。"
     exit 1
   fi
   sleep 1
 done
 if [ -z "$URL" ] || ! responds "$URL"; then
-  fail "起動を確認できませんでした。ログ（$LOG）の末尾:"; tail -n 30 "$LOG"; exit 1
+  fail "起動を確認できませんでした。ログ（${LOG}）の末尾:"; tail -n 30 "$LOG"; exit 1
 fi
 URL="${URL/127.0.0.1/localhost}"
 echo "$URL" > "$URLF"
